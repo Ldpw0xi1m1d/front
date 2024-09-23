@@ -11,6 +11,11 @@
     <input type="text" id="openText" name="input">
     <button onclick="sendOut()">Отправить</button>
 </div>
+<div>
+    <label for="outputText"></label>
+    <input type="text" id="outputText" readonly>
+    <button onclick="getData()">Получить</button>
+</div>
 
 <script>
     function sendOut() {
@@ -23,6 +28,15 @@
             },
             body: text
         })
+    }
+
+    function getData() {
+        fetch("http://localhost:8080/info")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("outputText").value = data;
+            })
+            .catch(error => console.error("Error getting data"));
     }
 </script>
 </body>
